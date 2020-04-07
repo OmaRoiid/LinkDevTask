@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Link Development</string>
+    <string name="explore">Explore</string>
+    <string name="live_chat">Live Chat</string>
+    <string name="gallery">Gallery</string>
+    <string name="wish_list">Wish List</string>
+    <string name="e_magazine">E-Magazine</string>
+    <string name="account_name">Omar Salem</string>
+    <string name="welcoem_txt">Welcome</string>
+    <string name="nav_drawer_open">Open Navigation Drawer</string>
+    <string name="nav_drawer_close">Close Navigation Drawer</string>
+    <string name="owner_sample">By:OmarSalem.com</string>
+    <string name="desc_sample">This month marks the first anniversary of the image of the environment directly surrounding the black hole at the center of the M87 galaxy This month marks the first anniversary of the image of the environment directly surrounding the black hole at the center of the M87 galaxy —captured by the —captured by the Event Horizon Telescope</string>
+    <string name="title_sample">Design patterns elements of reusable object-oriented software</string>
+    <string name="release_sample">24-5-2014</string>
+    <string name="error_msg">No Data available check your connection</string>
+
+</resources>

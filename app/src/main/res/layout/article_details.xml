@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffff">
+
+    <ImageView
+        android:id="@+id/article_iv_ds"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/article_date_ds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/release_sample"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/article_iv_ds"
+        app:layout_constraintEnd_toEndOf="@+id/article_iv_ds" />
+
+    <TextView
+        android:id="@+id/article_title_ds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingStart="18dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="18dp"
+        android:text="@string/title_sample"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/article_iv_ds"
+        app:layout_constraintStart_toStartOf="@+id/article_iv_ds"
+        app:layout_constraintTop_toBottomOf="@+id/article_iv_ds" />
+
+    <TextView
+        android:id="@+id/article_owner_ds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:text="@string/owner_sample"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/article_title_ds"
+        app:layout_constraintTop_toBottomOf="@+id/article_title_ds" />
+
+    <TextView
+        android:id="@+id/article_desc_ds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="18dp"
+        android:text="@string/desc_sample"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/article_owner_ds" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
