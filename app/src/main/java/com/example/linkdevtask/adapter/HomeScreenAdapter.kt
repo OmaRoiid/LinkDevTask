@@ -29,9 +29,8 @@ class HomeScreenAdapter(private val mContext : Context, var mOnClickedArticleLis
        private val mArticleTitle=itemView.findViewById<TextView>(R.id.article_title_tv)
        private val mArticleOwner=itemView.findViewById<TextView>(R.id.article_owner_tv)
        private val mArticleRelease=itemView.findViewById<TextView>(R.id.article_release_tv)
-       private val mOnClickedArticleListener:OnClickedArticleListener
+       private val mOnClickedArticleListener:OnClickedArticleListener = mOnClickedArticleListener
        init {
-           this.mOnClickedArticleListener=mOnClickedArticleListener
            itemView.setOnClickListener(this)
        }
             fun bind(position: Int){

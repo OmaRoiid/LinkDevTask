@@ -21,17 +21,16 @@ import com.example.linkdevtask.util.DateFormatting
 
 class DetailScreenFragment : Fragment() {
     lateinit var mClickedArticle: Articles
-    lateinit var mDetailScreenView: View
+    private var mDetailScreenView: View?=null
     lateinit var mDrawerBehaviour: DrawerBehaviour
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         try {
-            mDrawerBehaviour = activity as DrawerBehaviour
+            mDrawerBehaviour = context as DrawerBehaviour
         } catch (e: Exception) {
-            throw ClassCastException("$activity must implement DrawerBehaviour")
+            throw ClassCastException("$context must implement DrawerBehaviour")
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,32 +46,34 @@ class DetailScreenFragment : Fragment() {
     }
 
     private fun initDetailView() {
-        val mArticleTitle = mDetailScreenView.findViewById<TextView>(R.id.article_title_ds)
-        val mArticleRelease= mDetailScreenView.findViewById<TextView>(R.id.article_date_ds)
-        val mArticleOwner = mDetailScreenView.findViewById<TextView>(R.id.article_owner_ds)
-        val mArticleDesc = mDetailScreenView.findViewById<TextView>(R.id.article_desc_ds)
-        val mArticleImage = mDetailScreenView.findViewById<ImageView>(R.id.article_iv_ds)
-        val mArticlePage = mDetailScreenView.findViewById<Button>(R.id.open_btn)
+        val mArticleTitle = mDetailScreenView?.findViewById<TextView>(R.id.article_title_ds)
+        val mArticleRelease= mDetailScreenView?.findViewById<TextView>(R.id.article_date_ds)
+        val mArticleOwner = mDetailScreenView?.findViewById<TextView>(R.id.article_owner_ds)
+        val mArticleDesc = mDetailScreenView?.findViewById<TextView>(R.id.article_desc_ds)
+        val mArticleImage = mDetailScreenView?.findViewById<ImageView>(R.id.article_iv_ds)
+        val mArticlePage = mDetailScreenView?.findViewById<Button>(R.id.open_btn)
         val ownerTxt = "By " + mClickedArticle.author
         val formattedDate=mClickedArticle.publishedAt.substring(0, 10)
-        mArticleTitle.text = mClickedArticle.title
-        mArticleOwner.text = ownerTxt
-        mArticleDesc.text = mClickedArticle.description
-        mArticleRelease.text = DateFormatting.reFormat(formattedDate)
-        mArticlePage.setOnClickListener {
+        mArticleTitle?.text = mClickedArticle.title
+        mArticleOwner?.text = ownerTxt
+        mArticleDesc?.text = mClickedArticle.description
+        mArticleRelease?.text = DateFormatting.reFormat(formattedDate)
+        mArticlePage?.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("${mClickedArticle.url}"))
             startActivity(browserIntent)
         }
-        Glide.with(activity!!.application)
+        Glide.with(requireContext())
             .load(mClickedArticle.urlToImage)
             .placeholder(R.drawable.holder)
-            .into(mArticleImage)
+            .into(mArticleImage!!)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         mDrawerBehaviour.unlockDrawer()
-
+        mDetailScreenView.let {
+            mDetailScreenView=null
+        }
     }
 
 }

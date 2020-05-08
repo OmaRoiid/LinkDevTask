@@ -21,24 +21,25 @@ class HomeScreenFragment : Fragment(), OnClickedArticleListener {
     lateinit var mHomeScreenViewModel: HomeScreenViewModel
     lateinit var mHomeScreenViewModelFactory: HomeScreenViewModelFactory
     lateinit var mHomeScreenAdapter: HomeScreenAdapter
+    private var mHomeScreenView: View?=null
     private val mHomeScreenRepository = HomeScreenRepository()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val mHomeScreenView: View = inflater.inflate(R.layout.fragment_home, container, false)
-        val articlesList = mHomeScreenView.findViewById<RecyclerView>(R.id.articles_list)
-        articlesList.layoutManager = LinearLayoutManager(activity)
-        articlesList.setHasFixedSize(true)
+         mHomeScreenView= inflater.inflate(R.layout.fragment_home, container, false)
+        val articlesList = mHomeScreenView?.findViewById<RecyclerView>(R.id.articles_list)
+        articlesList?.layoutManager = LinearLayoutManager(activity)
+        articlesList?.setHasFixedSize(true)
         mHomeScreenViewModelFactory = HomeScreenViewModelFactory(activity!!.application, mHomeScreenRepository)
         mHomeScreenViewModel = ViewModelProvider(this, mHomeScreenViewModelFactory).get(HomeScreenViewModel::class.java)
         mHomeScreenViewModel.getArticlesFromServer()
         mHomeScreenViewModel.articlesLiveData.observe(viewLifecycleOwner, Observer { observedList ->
             observedList.let {
-                       mHomeScreenAdapter = HomeScreenAdapter(activity!!, this, observedList)
+                       mHomeScreenAdapter = HomeScreenAdapter(requireContext(), this, observedList)
                        mHomeScreenAdapter.notifyDataSetChanged()
-                       articlesList.adapter = mHomeScreenAdapter
+                       articlesList?.adapter = mHomeScreenAdapter
             }
         })
         return mHomeScreenView
@@ -54,6 +55,13 @@ class HomeScreenFragment : Fragment(), OnClickedArticleListener {
             ?.replace(R.id.container, mDetailScreenFragment)
             ?.addToBackStack(null)
             ?.commit()
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mHomeScreenView.let {
+            mHomeScreenView=null
+        }
+
     }
 
 }

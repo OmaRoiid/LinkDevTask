@@ -23,6 +23,8 @@ import com.example.linkdevtask.R
 import com.example.linkdevtask.listeners.DrawerBehaviour
 import com.example.linkdevtask.ui.home.HomeScreenFragment
 import com.google.android.material.navigation.NavigationView
+import leakcanary.AppWatcher
+import leakcanary.ObjectWatcher
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
@@ -37,7 +39,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         initViews(savedInstanceState)
     }
-
     private fun initViews(savedInstanceState: Bundle?) {
         mToolbar = findViewById(R.id.toolbar)
         errorView=findViewById(R.id.empty_view)
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
     //check the network state
+    @Suppress("DEPRECATION")
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
@@ -108,6 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    @Suppress("DEPRECATION")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.right_menu, menu)
         val searchView =

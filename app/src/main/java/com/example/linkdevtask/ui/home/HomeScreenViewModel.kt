@@ -14,13 +14,12 @@ class HomeScreenViewModel(application: Application, mHomeScreenRepository: HomeS
     private val coroutineContext: CoroutineContext get() = parentJob + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
     private var homeScreenRepository = mHomeScreenRepository
-    val articlesLiveData = MutableLiveData<MutableList<Articles>>()
-    fun getArticlesFromServer(): MutableLiveData<MutableList<Articles>> {
+    val articlesLiveData = MutableLiveData<List<Articles>>()
+       fun getArticlesFromServer() {
         scope.launch {
             val articles = homeScreenRepository.fetchArticles()
             articlesLiveData.postValue(articles)
         }
-        return articlesLiveData
     }
 
     private fun cancelAllRequests() = coroutineContext.cancel()

@@ -6,7 +6,7 @@ import com.example.linkdevtask.rest.ApiUtil
 import com.example.linkdevtask.rest.RetrofitClient
 
 class HomeScreenRepository : BaseRepository() {
-     suspend fun fetchArticles() :MutableList<Articles>?{
+     suspend fun fetchArticles() :List<Articles>?{
      val mRetrofit=RetrofitClient()
          val mergedList:List<Articles>?
              val mResponseOne = safeApiCall(
@@ -21,8 +21,9 @@ class HomeScreenRepository : BaseRepository() {
          )
         val mFirstList=mResponseOne?.articles?.toMutableList()
          val mSecondList=mResponseTwo?.articles?.toMutableList()
+
           mergedList=mFirstList.orEmpty()+mSecondList.orEmpty()
-             return mergedList.toMutableList()
+             return mergedList
          }
 
      }
