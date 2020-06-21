@@ -1,9 +1,8 @@
 package com.example.linkdevtask.ui.home
-
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.linkdevtask.repository.HomeScreenRepository
+import com.example.linkdevtask.store.repository.HomeScreenRepository
 
 class HomeScreenViewModelFactory(
     private val application: Application,

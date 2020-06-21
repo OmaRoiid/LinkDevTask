@@ -1,4 +1,4 @@
-package com.example.linkdevtask.repository
+package com.example.linkdevtask.store.webservice
 
 sealed class Result<out T: Any> {
     data class Success<out T : Any>(val data: T) : Result<T>()

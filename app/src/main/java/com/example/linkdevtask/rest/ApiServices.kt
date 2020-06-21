@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface ApiServices {
 
     @GET("articles")
-    fun getResponseOne(@Query("source") source:String,@Query("apiKey") apiKey:String) : Deferred<Response<ApiResponse>>
+    fun getResponseOneAsync(@Query("source") source:String, @Query("apiKey") apiKey:String) : Deferred<Response<ApiResponse>>
     @GET("articles")
-    fun getResponseTwo(@Query("source") source:String,@Query("apiKey") apiKey:String) : Deferred<Response<ApiResponse>>
+    fun getResponseTwoAsync(@Query("source") source:String, @Query("apiKey") apiKey:String) : Deferred<Response<ApiResponse>>
 }

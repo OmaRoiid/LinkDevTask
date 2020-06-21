@@ -19,7 +19,7 @@
         >
     <include
         android:id="@+id/new_id"
-        layout="@layout/included"
+        layout="@layout/details_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          />

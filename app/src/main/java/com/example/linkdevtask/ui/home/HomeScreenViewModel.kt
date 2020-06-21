@@ -1,10 +1,9 @@
 package com.example.linkdevtask.ui.home
-
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.linkdevtask.model.Articles
-import com.example.linkdevtask.repository.HomeScreenRepository
+import com.example.linkdevtask.store.repository.HomeScreenRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
