@@ -1,18 +1,23 @@
 package com.example.linkdevtask.ui.home
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.linkdevtask.R
 import com.example.linkdevtask.adapter.HomeScreenAdapter
 import com.example.linkdevtask.listeners.OnClickedArticleListener
 import com.example.linkdevtask.model.Articles
+import com.example.linkdevtask.roomDB.ArticleDao
+import com.example.linkdevtask.roomDB.ArticleDataBase
+import com.example.linkdevtask.store.localstorage.LocalStore
 import com.example.linkdevtask.store.repository.HomeScreenRepository
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.linkdevtask.store.webservice.WebServiceStore
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -20,8 +25,6 @@ class HomeScreenFragment : Fragment(), OnClickedArticleListener {
     private lateinit var mHomeScreenViewModel: HomeScreenViewModel
     private lateinit var mHomeScreenViewModelFactory : HomeScreenViewModelFactory
     private lateinit var mHomeScreenAdapter: HomeScreenAdapter
-    private val mWebServiceStore  by lazy { WebServiceStore() }
-    private val mHomeScreenRepository by lazy {  HomeScreenRepository(mWebServiceStore) }
     private var mHomeScreenView: View?=null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +39,7 @@ class HomeScreenFragment : Fragment(), OnClickedArticleListener {
         setupArticlesList()
     }
     private fun setupArticlesList(){
-        mHomeScreenViewModelFactory = HomeScreenViewModelFactory(requireActivity().application, mHomeScreenRepository)
+        mHomeScreenViewModelFactory = HomeScreenViewModelFactory(requireActivity().application, isNetworkAvailable())
         mHomeScreenViewModel = ViewModelProvider(this, mHomeScreenViewModelFactory).get(HomeScreenViewModel::class.java)
         mHomeScreenViewModel.getArticlesFromServer()
         mHomeScreenViewModel.articlesLiveData.observe(viewLifecycleOwner, Observer { observedList ->
@@ -53,6 +56,11 @@ class HomeScreenFragment : Fragment(), OnClickedArticleListener {
         val navigateAction = HomeScreenFragmentDirections.actionHomeScreenFragmentToDetailScreenFragment(mArticle)
         findNavController().navigate(navigateAction)
     }
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
     /*
     * for avoiding Library leaks
     * you must to destroy the view to make sure that there is any leaks that is the
@@ -63,7 +71,5 @@ class HomeScreenFragment : Fragment(), OnClickedArticleListener {
         mHomeScreenView.let {
             mHomeScreenView=null
         }
-
     }
-
 }

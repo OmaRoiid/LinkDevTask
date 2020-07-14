@@ -6,14 +6,14 @@ import com.example.linkdevtask.store.repository.HomeScreenRepository
 
 class HomeScreenViewModelFactory(
     private val application: Application,
-    private val mHomeScreenRepository: HomeScreenRepository
+    private val mIsOnline: Boolean
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeScreenViewModel::class.java)) {
             return HomeScreenViewModel(
                 application,
-                mHomeScreenRepository
+                mIsOnline
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

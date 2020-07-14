@@ -7,7 +7,7 @@ import com.example.linkdevtask.rest.RetrofitClient
 
 class WebServiceStore : BaseApiCall(){
 
-    suspend fun fetchArticlesFromApi() :List<Articles>?{
+    suspend fun fetchArticlesFromApi() :List<Articles>{
         val mRetrofit= RetrofitClient()
         val mergedList:List<Articles>?
         val mResponseOne = safeApiCall(

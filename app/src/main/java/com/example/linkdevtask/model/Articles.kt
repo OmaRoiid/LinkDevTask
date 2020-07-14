@@ -1,19 +1,40 @@
 package com.example.linkdevtask.model
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import org.parceler.Parcel
+import org.parceler.ParcelConstructor
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-
-data class Articles (
+@Entity(tableName = "article_detail")
+@Parcel(Parcel.Serialization.BEAN)
+data class  Articles @ParcelConstructor constructor (
+ @PrimaryKey(autoGenerate = true)
+ val mId:Int,
  @SerializedName("author")
-var author:String,
+ @NonNull
+ @ColumnInfo(name = "author_name")
+ val author:String,
  @SerializedName("title")
- var title:String,
+ @NonNull
+ @ColumnInfo(name = "article_title")
+ val title:String,
  @SerializedName("description")
- var description:String,
+ @NonNull
+ @ColumnInfo(name = "article_description")
+ val description:String,
  @SerializedName("url")
- var url:String,
+ @NonNull
+ @ColumnInfo(name = "article_url")
+ val url:String,
  @SerializedName("urlToImage")
- var urlToImage:String,
+ @NonNull
+ @ColumnInfo(name = "article_image")
+ val urlToImage:String,
  @SerializedName("publishedAt")
- var publishedAt:String
+ @NonNull
+ @ColumnInfo(name = "article_date")
+ val publishedAt:String
  ) :Serializable
