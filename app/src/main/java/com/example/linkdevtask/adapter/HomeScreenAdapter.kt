@@ -32,10 +32,10 @@ class HomeScreenAdapter(private val mContext : Context, var mOnClickedArticleLis
            itemView.setOnClickListener(this)
        }
             fun bind(position: Int){
-                val releaseDate = articlesList[position].publishedAt.substring(0,10)
+                val releaseDate = articlesList[position].publishedAt?.substring(0,10)
                 mArticleTitle.text=articlesList[position].title
                 mArticleOwner.text="By ${articlesList[position].author}"
-                mArticleRelease.text=DateFormatter.format(releaseDate)
+                mArticleRelease.text= releaseDate?.let { DateFormatter.format(it) }
                 Glide.with(mContext)
                     .load(articlesList[position].urlToImage )
                     .placeholder(R.drawable.holder)

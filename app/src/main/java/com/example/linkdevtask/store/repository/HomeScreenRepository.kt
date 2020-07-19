@@ -19,6 +19,5 @@ class HomeScreenRepository( private val mWebServiceStore: WebServiceStore,privat
                  localStore.fetchArticlesFromDB()
              }
          }
-
      }
 

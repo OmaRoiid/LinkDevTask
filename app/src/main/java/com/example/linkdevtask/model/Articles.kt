@@ -12,29 +12,25 @@ import java.io.Serializable
 @Parcel(Parcel.Serialization.BEAN)
 data class  Articles @ParcelConstructor constructor (
  @PrimaryKey(autoGenerate = true)
+ @NonNull
+ @ColumnInfo(name = "ID_COLUMN")
  val mId:Int,
  @SerializedName("author")
- @NonNull
  @ColumnInfo(name = "author_name")
- val author:String,
+ val author:String?,
  @SerializedName("title")
- @NonNull
  @ColumnInfo(name = "article_title")
- val title:String,
+ val title:String?,
  @SerializedName("description")
- @NonNull
  @ColumnInfo(name = "article_description")
- val description:String,
+ val description:String?,
  @SerializedName("url")
- @NonNull
  @ColumnInfo(name = "article_url")
- val url:String,
+ val url:String?,
  @SerializedName("urlToImage")
- @NonNull
  @ColumnInfo(name = "article_image")
- val urlToImage:String,
+ val urlToImage:String?,
  @SerializedName("publishedAt")
- @NonNull
  @ColumnInfo(name = "article_date")
- val publishedAt:String
+ val publishedAt:String?
  ) :Serializable

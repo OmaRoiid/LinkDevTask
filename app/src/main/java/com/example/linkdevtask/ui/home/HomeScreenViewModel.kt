@@ -22,6 +22,7 @@ class HomeScreenViewModel(application: Application, mIsOnline:Boolean) :
          val mLocalStore =LocalStore(articleDao)
         mHomeScreenRepository=  HomeScreenRepository(mWebServiceStore,mLocalStore,mIsOnline)
     }
+
     val articlesLiveData = MutableLiveData<List<Articles>>()
        fun getArticlesFromServer() {
         scope.launch {

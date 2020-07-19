@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import com.example.linkdevtask.model.Articles
 import com.example.linkdevtask.ui.home.HomeScreenFragment
 
-@Database(entities = [Articles::class],version = 1)
+@Database(entities = [Articles::class],version = 3, exportSchema = false)
 abstract class ArticleDataBase : RoomDatabase() {
     abstract fun getArticleDao(): ArticleDao
     companion object {

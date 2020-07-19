@@ -34,11 +34,11 @@ class DetailScreenFragment : Fragment() {
 
     private fun setupArticleDetailView() {
         val ownerTxt = "By ${mDetailArticleArgs.article.author}"
-        val formattedDate=mDetailArticleArgs.article.publishedAt.substring(0, 10)
+        val formattedDate=mDetailArticleArgs.article.publishedAt?.substring(0, 10)
         article_title_ds.text = mDetailArticleArgs.article.title
         article_owner_ds.text = ownerTxt
         article_desc_ds.text = mDetailArticleArgs.article.description
-        article_date_ds.text = DateFormatter.format(formattedDate)
+        article_date_ds.text = formattedDate?.let { DateFormatter.format(it) }
         open_btn.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mDetailArticleArgs.article.url))
             startActivity(browserIntent)

@@ -10,8 +10,7 @@ import com.example.linkdevtask.model.Articles
 @Dao
 interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticlesIntoDatabase(mArticle: List<Articles>)
-
+    suspend fun insertArticlesIntoDatabase(mArticle: List<Articles>)
 
     @Query("select * from article_detail")
     fun getSavedArticlesFromDB() : List<Articles>
