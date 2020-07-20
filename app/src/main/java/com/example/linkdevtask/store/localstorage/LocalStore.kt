@@ -1,24 +1,19 @@
 package com.example.linkdevtask.store.localstorage
 
-import android.os.AsyncTask
-import androidx.lifecycle.LiveData
+import com.example.linkdevtask.listeners.DatabaseCallBack
 import com.example.linkdevtask.model.Articles
 import com.example.linkdevtask.roomDB.ArticleDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class LocalStore(private val mArticleDao: ArticleDao) {
     private   var articleDao:ArticleDao =mArticleDao
+
      suspend fun insertToDB(articleDetail: List<Articles>)  {
                  articleDao.insertArticlesIntoDatabase(articleDetail)
          }
-      fun fetchArticlesFromDB() : List<Articles>
+    suspend fun fetchArticlesFromDB(mDatabaseCallBack: DatabaseCallBack)
     {
-        lateinit var allArticles : List<Articles>
-        GlobalScope.launch(Dispatchers.IO) {
-             allArticles=articleDao.getSavedArticlesFromDB()
-        }
-        return allArticles
+        mDatabaseCallBack.onComplete(articleDao.getSavedArticlesFromDB())
     }
 }

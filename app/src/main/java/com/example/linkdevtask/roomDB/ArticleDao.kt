@@ -13,5 +13,5 @@ interface ArticleDao {
     suspend fun insertArticlesIntoDatabase(mArticle: List<Articles>)
 
     @Query("select * from article_detail")
-    fun getSavedArticlesFromDB() : List<Articles>
+    suspend fun getSavedArticlesFromDB() : List<Articles>
 }
